@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function first(){
+            arr=prompt("enter numbers with , saparated");
+            newarr=arr.split(',');
+            newarr.sort();
+            document.write(newarr);
+        }
+
+        function bubbleSort(){
+            arr=prompt("enter numbers with , saparated");
+            newarr=arr.split(',');
+            let swap;
+            for(let i=0;i<newarr.length;i++){
+                for(let j=0;j<newarr.length;j++){
+                    if(newarr[i]>newarr[j]){
+                        swap = newarr[j]
+                        newarr[j] = newarr[i];
+                        newarr[i] = swap;
+                    }
+                }
+            }
+            document.write(newarr);
+        }
+        // first();
+        // bubbleSort();
+
+        function quickSort(){
+            let pivot=0;
+            arr=prompt("enter numbers with , saparated");
+            newarr=arr.split(',');
+
+        }
+
+        function wordSearch(){
+            sentance = prompt("enter a sentance")
+            senArr=sentance.split(" ")
+            findWord = prompt("enter a word to find.")
+
+            for(i=0;i<senArr.length;i++){
+                if(senArr[i]==findWord){
+                    document.write("found at index"+i)
+                }
+                else{
+                    document.write("not found at index"+i);
+                }
+            }
+        }
+
+        // wordSearch()
+
+        function callback(num,Some){
+            console.log(num);
+            Some()
+            console.log(num+1);
+        }
+        function foo(){
+            console.log("callback");
+            
+        }
+
+        // callback(10,foo)
+
+        // test = [10,58,93,22,48]
+        // test.push(20)
+        // test.pop()
+        // test.shift()
+        // test.unshift(10)
+        // test.splice(22)
+        // test.sort()
+        // console.log(test)
+
+        // let a=10;
+        // var b=20;
+
+        // function foo(num=5){
+        //     console.log(num)
+        // }
+        // foo(10);
+
+        // spreadArr=[20,30,40,50,60]
+        // let {f,s,...r}=spreadArr;
+        
+        // for (x of spreadArr){
+        //     console.log(x)
+        // }
+
+        // let arrow=(a,b)=>a+b;
+        // console.log(arrow(2,4));
+        let test3=12;
+        function bar(){
+            var test3=10;
+        }
+        bar()
+        console.log(test3);
+        
+        class test{
+            constructor(name,num){
+                this.name=name;
+                this.num=num;
+            }
+            pname=(name,num)=>console.log(name,num);
+        }
+        // test.pname()
+        
+    </script>
+</body>
+</html>
