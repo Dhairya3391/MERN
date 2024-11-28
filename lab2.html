@@ -6,21 +6,21 @@
 </head>
 <body>
   <h3>Select Items:</h3>
-  <div id="checkbox-container">
-    <label><input type="checkbox" value="Option 1"> banana</label><br>
-    <label><input type="checkbox" value="Option 2"> apple</label><br>
-    <label><input type="checkbox" value="Option 3"> orange</label><br>
-    <label><input type="checkbox" value="Option 4"> grapes</label><br>
+  <div id="container">
+    <label><input type="checkbox" value="dhairya is my name i'm from vapi my enrollment is 602"> dhairya</label><br>
+    <label><input type="checkbox" value="my friend harpal is learning js for almost 1 year now."> harpal</label><br>
+    <label><input type="checkbox" value="shreyansh has done development in laravel"> shreyansh</label><br>
+    <label><input type="checkbox" value="this is all,i'll see you later"> nothing</label><br>
   </div>
   <h3>Selected Items:</h3>
-  <div id="selected-values"></div>
+  <div id="values"></div>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-  const checkboxContainer = document.getElementById("checkbox-container");
-  const selectedValuesDiv = document.getElementById("selected-values");
+  let checkboxContainer = document.getElementById("container");
+  let selectedValuesDiv = document.getElementById("values");
 
   checkboxContainer.addEventListener("change", () => {
-    const selectedValues = Array.from(
+    let selectedValues = Array.from(
       checkboxContainer.querySelectorAll("input[type=checkbox]:checked")
     ).map(checkbox => checkbox.value);
 
