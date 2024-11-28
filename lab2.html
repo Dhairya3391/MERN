@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h3>Select Items:</h3>
+  <div id="checkbox-container">
+    <label><input type="checkbox" value="Option 1"> banana</label><br>
+    <label><input type="checkbox" value="Option 2"> apple</label><br>
+    <label><input type="checkbox" value="Option 3"> orange</label><br>
+    <label><input type="checkbox" value="Option 4"> grapes</label><br>
+  </div>
+  <h3>Selected Items:</h3>
+  <div id="selected-values"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const checkboxContainer = document.getElementById("checkbox-container");
+  const selectedValuesDiv = document.getElementById("selected-values");
+
+  checkboxContainer.addEventListener("change", () => {
+    const selectedValues = Array.from(
+      checkboxContainer.querySelectorAll("input[type=checkbox]:checked")
+    ).map(checkbox => checkbox.value);
+
+    selectedValuesDiv.textContent = selectedValues.join(", ");
+  });
+});
+
+</script>
+</body>
+</html>
