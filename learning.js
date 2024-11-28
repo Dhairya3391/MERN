@@ -1,23 +1,12 @@
-arr=[]
-for(i=0;i<=1000;i++){
-    if(i%2==0){
-        arr.push(i)
-    }
-}
-for(i=0;i<=1000;i++){
-    if(i%3==0){
-        arr.push(i)
-    }
-}
-for(i=0;i<=1000;i++){
-    if(i%5==0){
-        arr.push(i)
+let arr = new Set();
+
+for (let i = 0; i <= 1000; i++) {
+    if (i % 2 === 0 || i % 3 === 0 || i % 5 === 0) {
+        arr.add(i);
     }
 }
 
-const uniqueArray = [...new Set(arr)];
+let newArray = [...arr];
 
-console.log(uniqueArray);
-console.log(uniqueArray.length);
-
-
+console.log(newArray);
+console.log(newArray.length);
