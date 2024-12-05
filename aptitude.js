@@ -145,3 +145,9 @@ console.log(isMatch("abc", "a*c")); // true
 console.log(isMatch("abc", "?b*")); // true
 console.log(isMatch("abc", "a?c")); // true
 console.log(isMatch("abc", "ashfiuashf")); // false
+
+
+let a = 34;
+function baz(){
+  
+}
