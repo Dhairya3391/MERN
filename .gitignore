@@ -1,3 +1,4 @@
 portfolio/
 npm learning/
 .DS_Store
+**/node_modules/
