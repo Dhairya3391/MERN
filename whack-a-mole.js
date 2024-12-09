@@ -1,5 +1,5 @@
 let score = 0;
-let timeLeft = 5;
+let timeLeft = 30;
 const scoreDisplay = document.getElementById('score');
 const timerDisplay = document.getElementById('timer');
 const holes = document.querySelectorAll('.hole');

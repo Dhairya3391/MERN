@@ -25,6 +25,8 @@ app.get("/jokes", async (req, res) => {
   res.send(`<h1>${response.data.setup}</h1><p>${response.data.punchline}</p>`);
 });
 app.get("/search", (req, res) => {
-  const term = req.query.term;
-  res.send(`You searched for: ${term}`);
+  const xy = req.query.xy;
+  res.send(`You searched for: ${xy}`);
 });
+
+
