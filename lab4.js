@@ -32,12 +32,18 @@ const eventEmitter = new EventEmitter();
 
 // eventEmitter.emit('farewell', 'Dhairya');
 
-let called = someone =>{
-    console.log(someone,"called");
-}
+// let called = someone =>{
+//     console.log(someone,"called");
+// }
 
-eventEmitter.on('call',(someone)=>{
-    called(someone);
-})
+// eventEmitter.on('call',(someone)=>{
+//     called(someone);
+// })
 
 eventEmitter.emit('call', 'harpal')
+
+let foo = bar => { console.log(bar,"happened"); }
+
+eventEmitter.on('baz',(bax)=>{foo(bax)})
+
+eventEmitter.emit('baz','coding')
