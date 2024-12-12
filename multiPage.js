@@ -1,5 +1,6 @@
 const http = require('http');
 const url = require('url');
+const fs = require("fs")
 
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
@@ -19,6 +20,7 @@ const server = http.createServer((req, res) => {
             break;
         
         case '/about':
+            // fs.readFile("foo.txt","utf-8",(err,data)=>res.write(`<pre>${data}</pre>`))  not working for some js bs
             res.end(`
                 <h1>About Us</h1>
                 <p>I am a pationate about programming and learning many things on my own.</p>
