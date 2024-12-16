@@ -1,1 +1,0 @@
-this is bar text file and is used for readFile module and program.

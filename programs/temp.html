@@ -82,6 +82,7 @@
         const response = await fetch(apiBaseUrl);
         const items = await response.json();
         const tableBody = document.getElementById("itemTableBody");
+        
         tableBody.innerHTML = "";
         items.forEach((item) => {
           const row = document.createElement("tr");
