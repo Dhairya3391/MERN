@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Item Management</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+      .table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mb-4 text-center">Item Management</h1>
+
+      <form id="addItemForm" class="mb-4">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="Item Name"
+              required
+            />
+          </div>
+          <div class="col-md-3">
+            <input
+              type="number"
+              id="quantity"
+              class="form-control"
+              placeholder="Quantity"
+              required
+            />
+          </div>
+          <div class="col-md-3">
+            <input
+              type="number"
+              id="price"
+              class="form-control"
+              placeholder="Price"
+              required
+            />
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+              Add Item
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="table-wrapper">
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="itemTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const apiBaseUrl = "http://localhost:3000/items";
+
+      async function fetchItems() {
+        const response = await fetch(apiBaseUrl);
+        const items = await response.json();
+        const tableBody = document.getElementById("itemTableBody");
+        tableBody.innerHTML = "";
+        items.forEach((item) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+          <td>${item.name}</td>
+          <td>${item.quantity}</td>
+          <td>$${item.price.toFixed(2)}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" onclick="editItem('${
+              item._id
+            }')">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteItem('${
+              item._id
+            }')">Delete</button>
+          </td>
+        `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      document
+        .getElementById("addItemForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const quantity = document.getElementById("quantity").value;
+          const price = document.getElementById("price").value;
+
+          await fetch(apiBaseUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, quantity, price }),
+          });
+
+          e.target.reset();
+          fetchItems();
+        });
+
+      async function deleteItem(id) {
+        if (!confirm("Are you sure you want to delete this item?")) return;
+
+        await fetch(`${apiBaseUrl}/${id}`, { method: "DELETE" });
+        fetchItems();
+      }
+
+      async function editItem(id) {
+        const name = prompt("Enter new name:");
+        const quantity = prompt("Enter new quantity:");
+        const price = prompt("Enter new price:");
+        if (!name || !quantity || !price) return;
+
+        await fetch(`${apiBaseUrl}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, quantity, price }),
+        });
+
+        fetchItems();
+      }
+
+      fetchItems();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
