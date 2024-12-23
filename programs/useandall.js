@@ -11,6 +11,21 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
+app.use('/student', (req, res, next) => {
+    res.write('hello')
+    next();
+});
+
+app.get('/student/:id',(req,res)=>{
+    console.log("id claled");
+    res.end();
+})
+
+app.use('/api', (req, res, next) => {
+  console.log('Middleware for /api routes');
+  next();
+});
+
 app.all('/api/all', (req, res) => {
   res.send(`You used ${req.method} method on /api/all`);
 });
