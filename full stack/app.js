@@ -34,40 +34,24 @@ const Product = mongoose.model("Product", productSchema);
 
 function createCrudRoutes(model, basePath, app) {
   app.get(basePath, async (req, res) => {
-    try {
       const data = await model.find();
       res.json(data);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
   });
 
   app.post(basePath, async (req, res) => {
-    try {
       const newItem = new model(req.body);
       const savedItem = await newItem.save();
       res.status(201).json(savedItem);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
   });
 
   app.put(`${basePath}/:id`, async (req, res) => {
-    try {
       const updatedItem = await model.findByIdAndUpdate(req.params.id, req.body, { new: true });
       res.json(updatedItem);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
   });
 
   app.delete(`${basePath}/:id`, async (req, res) => {
-    try {
       await model.findByIdAndDelete(req.params.id);
       res.json({ message: "Item deleted successfully" });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
   });
 }
 
