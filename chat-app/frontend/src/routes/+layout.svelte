@@ -1,6 +1,13 @@
 <script>
 	import '../app.css';
-	let { children } = $props();
+	import { authStore } from '$lib/stores/authStore';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		authStore.initializeFromStorage();
+	});
 </script>
 
-{@render children()}
+<div class="min-h-screen bg-gray-50">
+	<slot />
+</div>

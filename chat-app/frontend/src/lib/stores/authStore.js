@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 function createAuthStore() {
-    const { subscribe, set} = writable({
+    const { subscribe, set } = writable({
         isAuthenticated: false,
         user: null,
         loading: true
@@ -17,6 +17,7 @@ function createAuthStore() {
             });
             // Store in localStorage for persistence
             localStorage.setItem('user', JSON.stringify(userData));
+            document.cookie = `session=${userData.token}; path=/; max-age=86400`;
         },
         logout: () => {
             set({
@@ -25,6 +26,7 @@ function createAuthStore() {
                 loading: false
             });
             localStorage.removeItem('user');
+            document.cookie = 'session=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         },
         initializeFromStorage: () => {
             const storedUser = localStorage.getItem('user');
