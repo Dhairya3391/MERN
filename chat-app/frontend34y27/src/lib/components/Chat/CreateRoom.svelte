@@ -1,10 +1,16 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { authStore } from '$lib/stores/authStore';
 
 	const dispatch = createEventDispatcher();
 	let creating = false;
 
 	async function createRoom() {
+		if (!$authStore.user) {
+			console.error('User not authenticated');
+			return;
+		}
+
 		try {
 			creating = true;
 			const response = await fetch('http://localhost:3000/api/chat/create-room', {
@@ -13,7 +19,7 @@
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					creatorId: globalThis.$authStore.user.uniqueId
+					creatorId: $authStore.user.uniqueId
 				})
 			});
 

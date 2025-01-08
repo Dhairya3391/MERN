@@ -1,5 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { authStore } from '$lib/stores/authStore';
+	import { get } from 'svelte/store';
 
 	const dispatch = createEventDispatcher();
 	let roomId = '';
@@ -7,6 +9,12 @@
 
 	async function joinRoom() {
 		if (!roomId.trim()) return;
+
+		const { user } = get(authStore);
+		if (!user) {
+			console.error('User not authenticated');
+			return;
+		}
 
 		try {
 			joining = true;
@@ -16,7 +24,7 @@
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					userId: globalThis.$authStore.user.uniqueId,
+					userId: user.uniqueId,
 					roomId: roomId.trim()
 				})
 			});

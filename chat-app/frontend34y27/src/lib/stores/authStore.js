@@ -10,6 +10,7 @@ function createAuthStore() {
     return {
         subscribe,
         login: (userData) => {
+            // console.log('Logging in with userData:', userData); // Debug log
             set({
                 isAuthenticated: true,
                 user: userData,
@@ -30,10 +31,12 @@ function createAuthStore() {
         },
         initializeFromStorage: () => {
             const storedUser = localStorage.getItem('user');
+            // console.log('Initializing from storage:', storedUser); // Debug log
             if (storedUser) {
+                const parsedUser = JSON.parse(storedUser);
                 set({
                     isAuthenticated: true,
-                    user: JSON.parse(storedUser),
+                    user: parsedUser.user, // Access the nested user object
                     loading: false
                 });
             } else {
