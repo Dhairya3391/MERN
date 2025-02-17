@@ -22,6 +22,7 @@ function Timer() {
     setSeconds(0);
   };
 
+  
   useEffect(() => {
     if (isActive) {
       intervalRef.current = setInterval(() => {
